@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block main %}
+
+<div class="card-body">
+{% if not page.output or page.err %}
+	{{page.p_contenu|safe}}
+{% else %}
+	{% if page.err %}{{page.err|safe}}{% endif %}
+	{% if page.output and page.err %}<hr>{% endif %}
+	{% if page.output %}{{page.output|safe|urlize}}{% endif %}
+{% endif %}
+{% if page.speeddial %}
+	<h3>Speed Dial</h3>
+	<div class="container mb-4">
+		<div class="row">
+		{% for item in page.speeddial %}
+			<div class="col-sm col-lg-3 mb-1">
+				<div class="card bg-{{item.sd_color}}" style="padding: 1px;">
+					<div class="card-body d-flex flex-row" style=" background : white; opacity: 0.85;">
+						<div class="p-2"><a class="text-decoration-none" href="{{item.sd_adresse}}" target="_blank"><i class="{% if item.sd_icone != '' %}{{item.sd_icone }}{% else %}fas fa-external-link-square-alt{% endif %}"></i></a></div>
+						<div class="p-2 w-80" onmouseover="this.style.cursor='pointer';" onclick="bt_open_url('{{item.sd_adresse|escapejs}}')">{{item.sd_titre}}</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+{% endif%}
+{% if page.form and not page.output %}
+	<div class="col-sm-9 p-0 m-3">
+	<div class="card text-white bg-dark">
+		{% if page.p_f_titre %}<div class="card-header">{{page.p_f_titre}}</div>{% endif %}
+		<div class="card-body">
+			<form action="{{page.p_adresse}}" method="post">{% csrf_token %}
+				{{ page.form|crispy }}
+				<input type="submit" class="btn btn-success mt-1" value="Valider">
+			</form>
+		</div>
+	</div>
+	</div>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block right_panel %}
+{% if page.p_right != "" %}
+<div class="card-body">
+	{% if page.form and page.output %}
+		{% if page.p_f_titre %}<div class="card-header">{{page.p_f_titre}}</div>{% endif %}
+			<form class="mb-2" action="{{page.p_adresse}}" method="post">{% csrf_token %}
+				{{ page.form|crispy }}
+				<input type="submit" class="btn btn-success mt-1" value="Valider">
+			</form>
+	{% endif %}
+	{{page.p_right|safe}}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+function bt_open_url(url){
+	{% comment %} window.open(url,'_blank'); {% endcomment %}
+	window.location.href=url;
+};
+</script>
+{% endblock %}
