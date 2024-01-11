@@ -1,8 +1,10 @@
 **Presrequi :**
-pip install django==4.2.8 pip install django-crispy-forms
+pip install django==4.2.8
+pip install django-crispy-forms
 
 **Install :**
-python manage.py migrate python manage.py runserver
+python manage.py migrate
+python manage.py runserver
 
 **Installation sur un envoronement Docker :** 
 voir "Installation.md sur docker"
