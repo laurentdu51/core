@@ -1,0 +1,332 @@
+MrDuhaz / Blog-Duhaz
+ 
+ 
+base_no_card.html 7.2 KB
+  
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr" class="h-100">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="keywords" content="{%if page.p_mots_clefs%}{{page.p_mots_clefs}}{% endif %}">
+<meta name="description" content="{% if page.p_description %}{{page.p_description}}{% endif %}">
+{% block add_meta_description %}{% endblock %}
+<title>{% if page.p_meta_title %}{{page.p_meta_title}} | {% elif page.p_titre %}{{page.p_titre}} | {% endif %}{{page.c_sitename}}</title>
+<link rel="shortcut icon" href="/static/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link href="//fonts.googleapis.com/css2?family=Kufam&display=swap" rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/7cf2a101ac.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+{% if not request.user.is_authenticated %}
+<script data-ad-client="ca-pub-0171697375250839" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+{% endif %}
+<style type="text/css">
+	img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+	body {
+		background-color:black;
+		background-image: url('{% static page.c_bgimagelogo %}'), url('{% static page.c_bgimage %}') ;
+		background-position: 96% 95%, center ;
+		background-size: 20%,cover;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		font-size: 15px;
+	}
+</style>
+</head>
+<body class="d-flex flex-column h-100">
+	<header style="color: #fff; font-family: Kufam', cursive;">
+	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: {{page.c_bgcolor}};"> 
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{% url 'core_index' %}"><i class="{{page.c_sitelogo}}"></i> {{page.c_sitename}} </a>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		{% if page.p_menu_haut %}
+			<ul class="navbar-nav mr-auto">
+			{% regroup page.p_menu_haut by p_menu_parent as menu_with_parent %}
+	
+			{% for p_menu_parent in menu_with_parent%}
+				{% if p_menu_parent.grouper != none %}
+				<div class="navbar-nav dropdown">
+				<a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars" ></i> {{ p_menu_parent.grouper }}</a>
+					<div class="dropdown-menu" style="margin-top: 28px; margin-left: 5px;" aria-labelledby="navbarDropdownMenuLink">
+					{% for item in p_menu_parent.list|dictsortreversed:"p_menu_poid" %}
+						<a class="dropdown-item" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %}  href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
+					{% endfor %}
+					</div>
+				</div>
+				{% else %}
+					{% for item in p_menu_parent.list %}
+						<li class="nav-item"><a class="nav-link" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %}  href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+			</ul>
+		{% endif %}
+		</div>
+		{% if page.p_menu_haut or page.blog_cat %}
+		<div class="pos-f-t d-lg-none justify-content-end">
+		<div class="collapse" id="navbarToggleExternalContent">
+			<div class="collapse" id="navbarToggleExternalContent">
+				<div class="p-3" style="background-color: {{page.c_bgcolor}};">
+					{% if page.p_menu_haut %}
+						<ul class="navbar-nav">
+						{% for item in page.p_menu_haut %}
+							<li class="nav-item"><a class="nav-link" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %} href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
+						{% endfor %}
+						{% if page.c_menulogin == 'True' %}
+							<hr>
+							{% if not request.user.is_authenticated %}
+								<li class="nav-item"><a class="nav-link" href="{% url 'core_login' %}" ><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+							{% elif request.user.is_authenticated %}
+								<li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}" ><i class="fas fa-cog" ></i> Admin</a></li>
+								<li class="nav-item"><a class="nav-link" href="{% url 'core_logout' %}" ><i class="fas fa-sign-out-alt"></i> Déconexion</a></li>
+							{% endif %}
+						{% endif %}
+						</ul>
+					{% endif %}
+				</div>
+		</div>
+		<nav class="navbar navbar-dark justify-content-end" style="background-color: {{page.c_bgcolor}};">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			 </button>
+		</nav>
+		{% endif %}
+	</div>
+	</div>
+	</nav>
+</header>
+<main role="main" class="flex-shrink-0">
+<div class="container-fluid mw-100">
+	<div class="row p-2">
+		{% block left_panel %}
+		{% endblock %}
+		<div class="col-lg-8 p-lg-1 p-md-0 mb-sm-1">
+			{% if messages %}
+				<div class="card-body messages p-0 mr-3 ml-3">
+				{% for message in messages %}
+					<div class="m-2 alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+					<button type="button" class="close" data-dismiss="alert" >&times;</button>
+					{{ message }}
+					</div>
+				{% endfor %}
+				</div>
+			{% endif %}
+			{% block main %}{% endblock %}
+		</div>
+		
+		<div class="col-lg-4 p-lg-1 p-md-0">
+			<div class="card" style="background-color: rgba(250,250,250,0.88);" >
+				{% block right_panel %}
+				{% endblock %}
+				{% if not request.user.is_authenticated and page.p_right and not "account/" in request.path %}
+					<div class="card-body">
+						<h5 class="card-title"> Une Pub </h5>
+						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- Pub-1 -->
+						<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-0171697375250839"
+							data-ad-slot="9918621322"
+							data-ad-format="auto"
+							data-full-width-responsive="true">
+						</ins>
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+</main>
+<footer class="footer mt-auto py-1 text-white" style="background-color: {{page.c_bgcolor}};">
+	<div class="container">
+		Blog.Duhaz.fr - Jan. 2024
+		{% if page.p_menu_pied %}
+		{% for item in page.p_menu_pied %}
+			<a class="link-light" href="{{item.p_adresse}}">{{item.p_titre}}</a>{% if not forloop.last %}, {% endif %}
+		{% endfor %}
+		{% endif %}
+	</div>
+</footer>
+{% block modals %}{% endblock %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+</script>
+{% block script %}
+{% endblock %}
+</body>
+</html>
+© 2024 Mr Duhaz gogs !Page: 186ms Modèle: 3ms  français Site web
