@@ -1,3 +1,6 @@
+# Commande à exécuté dans votre environnement docker.
+# Avec Django 3.2.23 & django-crispy-forms==1.12.0 & django-trumbowyg
+
 apk add git nano
 
 django-admin startproject dev_core
@@ -20,7 +23,7 @@ nano dev_core/settings.py
 +	'core',
 
 rm dev_core/urls.py
-nano dev_core/urls.py
+nano dev_core/urls.py > voir fichier url.md
 
 python manage.py migrate
 python manage.py runserver 0.0.0.0:8080
