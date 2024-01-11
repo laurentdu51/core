@@ -1,0 +1,26 @@
+apk add git nano
+
+django-admin startproject dev_core
+cd dev_core
+
+python manage.py migrate
+python manage.py createsuperuser
+
+nano dev_core/settings.py
+-->	ALLOWED_HOSTS = [*]
+
+python manage.py runserver 0.0.0.0:8080
+
+git clone https://dev.duhaz.fr/MrDuhaz/core.git
+
+nano dev_core/settings.py
+-->	INSTALLED_APPS = [
++	'trumbowyg',
++	'crispy_forms',
++	'core',
+
+rm dev_core/urls.py
+nano dev_core/urls.py
+
+python manage.py migrate
+python manage.py runserver 0.0.0.0:8080
