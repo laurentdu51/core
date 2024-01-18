@@ -1,9 +1,21 @@
-Presrequi :
+**Presrequi :**
 
-pip install django==4.2.8 pip install django-crispy-forms
+pip install django==4.2.8
 
-Install :
+pip install django-crispy-forms
 
-python manage.py migrate python manage.py runserver
+**Install :**
 
-Changlog : Jan 2024 - Mise a jour gestion menu et amélioration mise en page 2023 - Version Initial
+python manage.py migrate
+
+python manage.py runserver
+
+**Installation sur un envoronement Docker :** 
+
+voir "Installation.md sur docker"
+
+**Changlog :**
+
+* Jan 2024 - Mise a jour gestion menu et amélioration mise en page 
+
+* 2023 - Version Initial
