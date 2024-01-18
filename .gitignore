@@ -19,3 +19,9 @@ migrations/__pycache__/0007_auto_20231201_1455.cpython-312.pyc
 migrations/__pycache__/0008_speed_dial_sd_icone.cpython-312.pyc
 migrations/__pycache__/0009_speed_dial_sd_color.cpython-312.pyc
 migrations/__pycache__/0010_auto_20231222_1114.cpython-312.pyc
+migrations/__pycache__/0011_auto_20240118_2009.cpython-312.pyc
+migrations/__pycache__/0011_auto_20240118_2011.cpython-312.pyc
+migrations/__pycache__/0011_auto_20240118_2016.cpython-312.pyc
+migrations/__pycache__/0011_alter_page_p_menu_parent.cpython-312.pyc
+migrations/__pycache__/0012_page_p_menu_est_parent.cpython-312.pyc
+migrations/__pycache__/0013_alter_page_p_menu_parent.cpython-312.pyc
