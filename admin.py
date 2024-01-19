@@ -56,4 +56,11 @@ class Contact_Admin(admin.ModelAdmin):
 
 admin.site.register(Contact, Contact_Admin)
 
+class Fichier_Admin(admin.ModelAdmin):
+	list_display = ('f_nom', 'f_date',)
+	search_fields = ['f_nom',]
+	list_filter = ('f_date',)
+
+admin.site.register(Fichier, Fichier_Admin)
+
 

@@ -49,6 +49,24 @@ class Data (models.Model) : #stocage de donnée dynamique
 		return self.d_titre
 	def __str__(self):
 		return '%s' % (self.d_titre)
+	
+class Fichier (models.Model) : # Upload de fichier pour réutilisation dans les pages
+	f_nom = models.CharField("Nom du fichier", max_length = 128, blank = True, editable = False)
+	f_date = models.DateTimeField("Date", auto_now_add=True)
+	f_fichier = models.FileField("Fichier", upload_to='static/uploads/')
+
+	class Meta :
+		verbose_name = 'Stocage de fichiers'
+		verbose_name_plural = 'Stocage de fichiers'
+		ordering = ['f_date']
+
+	def save(self, *args, **kwargs) :
+		self.f_nom = slugify(self.f_fichier.name)
+		super(Fichier, self).save(*args, **kwargs)
+	def __unicode__(self):
+		return self.f_nom
+	def __str__(self):
+		return '%s' % (self.f_nom)
 
 class Page (models.Model) : #Architecture pour les pages static est dynamique
 	p_titre = models.CharField("Titre", max_length = 128, unique = True)
