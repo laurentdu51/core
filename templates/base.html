@@ -9,7 +9,7 @@
 	{% block add_meta_description %}{% endblock %}
 	<title>{{page.c_sitename}}{% if page.p_meta_title %} | {{page.p_meta_title}}{% elif page.p_titre %} | {{page.p_titre}}{% endif %}</title>
 	<link rel="shortcut icon" href="/static/favicon.ico">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 	<link href="//fonts.googleapis.com/css2?family=Kufam&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/7cf2a101ac.js"></script>
 	{% if not request.user.is_authenticated %}
@@ -109,7 +109,7 @@
 	<div class="row p-2">
 		{% block left_panel %}
 		{% endblock %}
-		<div class="col-lg-9 p-0">
+		<div class="col-lg-9 p-lg-1 p-md-0 mb-sm-1">
 			{% if messages %}
 				<div class="card-body messages p-0 mr-3 ml-3">
 				{% for message in messages %}
@@ -133,14 +133,29 @@
 				{% endif %}
 			</div>
 		</div>
-		{% if not request.user.is_authenticated or page.p_right %}
-		<div class="col-lg-3">
+		<div class="col-lg-3 p-lg-1 p-md-0 mb-sm-1">
 			<div class="card" style="background-color: rgba(250,250,250,0.88);" >
+				{% include 'feeds_link.html' %}
 				{% block right_panel %}
 				{% endblock %}
+				{% if not request.user.is_authenticated and page.p_right and not "account/" in request.path %}
+					<div class="card-body">
+						<h5 class="card-title"> Une Pub </h5>
+						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- Pub-1 -->
+						<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-0171697375250839"
+							data-ad-slot="9918621322"
+							data-ad-format="auto"
+							data-full-width-responsive="true">
+						</ins>
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</div>
+				{% endif %}
 			</div>
-		</div>
-		{% endif %}
 	</div>
 </div>
 </main>
@@ -154,9 +169,9 @@
 	</div>
 </footer>
 {% block modals %}{% endblock %}
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 {% block script %}
 {% endblock %}
 </body>
