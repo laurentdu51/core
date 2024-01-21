@@ -33,7 +33,7 @@
 	</style>
 </head>
 <body class="d-flex flex-column h-100">
-<header style="color: #fff; font-family: Omnes;">
+	<header style="color: #fff; font-family: Kufam', cursive;">
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: {{page.c_bgcolor}};"> 
 		<div class="container-fluid">
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,7 +46,7 @@
 			{% if p_menu_parent.grouper != none %}
 			<div class="navbar-nav dropdown">
 			<a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars" ></i> {{ p_menu_parent.grouper }}</a>
-				<div class="dropdown-menu" style="margin-top: 28px; margin-left: 5px;" aria-labelledby="navbarDropdownMenuLink">
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				{% for item in p_menu_parent.list|dictsortreversed:"p_menu_poid" %}
 					<a class="dropdown-item" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %}  href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
 				{% endfor %}
@@ -63,7 +63,7 @@
 		{% if page.c_menulogin == 'True' %}
 			<div class="navbar-nav dropdown">
 				<a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-id-badge" ></i> Mon profil</a>
-				<div class="dropdown-menu" style="margin-top: 28px; margin-left: 5px;" aria-labelledby="navbarDropdownMenuLink">
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					{% if not request.user.is_authenticated %}
 						<a class="dropdown-item" href="{% url 'core_login' %}" ><i class="fas fa-sign-in-alt"></i> Connexion</a>
 					{% elif request.user.is_authenticated %}
@@ -161,6 +161,7 @@
 </main>
 <footer class="footer mt-auto py-1 text-white" style="background-color: {{page.c_bgcolor}};">
 	<div class="container">
+		{{page.c_sitename}} - Jan. 2024
 		{% if page.p_menu_pied %}
 		{% for item in page.p_menu_pied %}
 			<a class="link-light" href="{{item.p_adresse}}">{{item.p_titre}}</a>{% if not forloop.last %}, {% endif %}
