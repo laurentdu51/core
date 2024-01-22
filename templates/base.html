@@ -75,6 +75,7 @@
 		{% endif %}
 		</div>
 		<div class="pos-f-t d-lg-none justify-content-end">
+			<a class="navbar-brand" href="{% url 'core_index' %}"><i class="{{page.c_sitelogo}}"></i> {{page.c_sitename}} </a>
 		<div class="collapse" id="navbarToggleExternalContent">
 			<div class="p-3" style="background-color: {{page.c_bgcolor}};">
 				{% if page.p_menu_haut %}
@@ -100,7 +101,7 @@
 			<span class="navbar-toggler-icon"></span>
 			 </button>
 		</nav>
-	</div>
+		</div>
 	</div>
 	</nav>
 </header>

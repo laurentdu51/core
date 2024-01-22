@@ -38,30 +38,31 @@
 	<header style="color: #fff; font-family: Kufam', cursive;">
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: {{page.c_bgcolor}};"> 
 		<div class="container-fluid">
-			<a class="navbar-brand" href="{% url 'core_index' %}"><i class="{{page.c_sitelogo}}"></i> {{page.c_sitename}} </a>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<a class="navbar-brand" href="{% url 'core_index' %}"><i class="{{page.c_sitelogo}}"></i> {{page.c_sitename}} </a>
 		{% if page.p_menu_haut %}
-			<ul class="navbar-nav mr-auto">
-			{% regroup page.p_menu_haut by p_menu_parent as menu_with_parent %}
-	
-			{% for p_menu_parent in menu_with_parent%}
-				{% if p_menu_parent.grouper != none %}
-				<div class="navbar-nav dropdown">
-				<a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars" ></i> {{ p_menu_parent.grouper }}</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					{% for item in p_menu_parent.list|dictsortreversed:"p_menu_poid" %}
-						<a class="dropdown-item" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %}  href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
-					{% endfor %}
-					</div>
+		<ul class="navbar-nav mr-auto">
+		{% regroup page.p_menu_haut by p_menu_parent as menu_with_parent %}
+
+		{% for p_menu_parent in menu_with_parent%}
+			{% if p_menu_parent.grouper != none %}
+			<div class="navbar-nav dropdown">
+			<a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars" ></i> {{ p_menu_parent.grouper }}</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				{% for item in p_menu_parent.list|dictsortreversed:"p_menu_poid" %}
+					<a class="dropdown-item" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %}  href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
+				{% endfor %}
 				</div>
-				{% else %}
-					{% for item in p_menu_parent.list %}
-						<li class="nav-item"><a class="nav-link" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %}  href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
-					{% endfor %}
-				{% endif %}
-			{% endfor %}
-			</ul>
-			{% if page.c_menulogin == 'True' %}
+			</div>
+			{% else %}
+				{% for item in p_menu_parent.list %}
+					<li class="nav-item"><a class="nav-link" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %}  href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+		</ul>
+		{% endif %}
+		{% if page.c_menulogin == 'True' %}
 			<div class="navbar-nav dropdown">
 				<a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-id-badge" ></i> Mon profil</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -74,38 +75,35 @@
 				</div>
 			</div>
 		{% endif %}
-		{% endif %}
 		</div>
-		{% if page.p_menu_haut or page.blog_cat %}
 		<div class="pos-f-t d-lg-none justify-content-end">
+			<a class="navbar-brand" href="{% url 'core_index' %}"><i class="{{page.c_sitelogo}}"></i> {{page.c_sitename}} </a>
 		<div class="collapse" id="navbarToggleExternalContent">
-			<div class="collapse" id="navbarToggleExternalContent">
-				<div class="p-3" style="background-color: {{page.c_bgcolor}};">
-					{% if page.p_menu_haut %}
-						<ul class="navbar-nav">
-						{% for item in page.p_menu_haut %}
-							<li class="nav-item"><a class="nav-link" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %} href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
-						{% endfor %}
-						{% if page.c_menulogin == 'True' %}
-							<hr>
-							{% if not request.user.is_authenticated %}
-								<li class="nav-item"><a class="nav-link" href="{% url 'core_login' %}" ><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
-							{% elif request.user.is_authenticated %}
-								<li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}" ><i class="fas fa-cog" ></i> Admin</a></li>
-								<li class="nav-item"><a class="nav-link" href="{% url 'core_logout' %}" ><i class="fas fa-sign-out-alt"></i> Déconexion</a></li>
-							{% endif %}
+			<div class="p-3" style="background-color: {{page.c_bgcolor}};">
+				{% if page.p_menu_haut %}
+					<ul class="navbar-nav">
+					{% for item in page.p_menu_haut %}
+						<li class="nav-item"><a class="nav-link" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %} href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
+					{% endfor %}
+					{% if page.c_menulogin == 'True' %}
+						<hr>
+						{% if not request.user.is_authenticated %}
+							<li class="nav-item"><a class="nav-link" href="{% url 'core_login' %}" ><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+						{% elif request.user.is_authenticated %}
+							<li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}" ><i class="fas fa-cog" ></i> Admin</a></li>
+							<li class="nav-item"><a class="nav-link" href="{% url 'core_logout' %}" ><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
 						{% endif %}
-						</ul>
 					{% endif %}
-				</div>
+					</ul>
+				{% endif %}
+			</div>
 		</div>
-		<nav class="navbar navbar-dark justify-content-end" style="background-color: {{page.c_bgcolor}};">
+		<nav class="navbar navbar-dark" style="background-color: {{page.c_bgcolor}};">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 			 </button>
 		</nav>
-		{% endif %}
-	</div>
+		</div>
 	</div>
 	</nav>
 </header>
