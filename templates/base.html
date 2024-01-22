@@ -121,22 +121,23 @@
 				{% endfor %}
 				</div>
 			{% endif %}
-			<div class="card" style="background-color: rgba(250,250,250,0.88);" >
+			{% if page.c_card_mp == 'True'%}<div class="card" style="background-color: rgba(250,250,250,0.88);" >
 				{% if page.p_see_title_and_des_in_templates == True %}
 				<div class="card-header">
 						<h2>{% block title %}{% if page.p_icone != "" %}<i class="{{page.p_icone}}"></i> {% endif %}{{page.p_titre|safe}}{% endblock %}</h2>
 				</div>
 				{% endif %}
-				{% if page.p_include %}
-					{% include page.p_include %}
-				{% else %}
-					{% block main %}{% endblock %}
-				{% endif %}
-			</div>
+			{% endif %}
+			{% if page.p_include %}
+				{% include page.p_include %}
+			{% else %}
+				{% block main %}{% endblock %}
+			{% endif %}
+			{% if page.c_card_mp != 'None'%}</div>{% endif %}
 		</div>
 		<div class="col-lg-3 p-lg-1 p-md-0 mb-sm-1">
-			<div class="card" style="background-color: rgba(250,250,250,0.88);" >
-				{% include 'feeds_link.html' %}
+			{% if page.c_card_rp == 'True'%}<div class="card" style="background-color: rgba(250,250,250,0.88);" >{% endif %}
+				{% if page.c_includ_rp != 'None'%}{% include page.c_includ_rp %}{% endif %}
 				{% block right_panel %}
 				{% endblock %}
 				{% if not request.user.is_authenticated and page.p_right and not "account/" in request.path %}
@@ -154,9 +155,9 @@
 						<script>
 							(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
-					</div>
 				{% endif %}
-			</div>
+			{% if page.c_card_rp != 'None'%}</div>{% endif %}
+		</div>
 	</div>
 </div>
 </main>
