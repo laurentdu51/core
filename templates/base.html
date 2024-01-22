@@ -45,7 +45,7 @@
 		{% for p_menu_parent in menu_with_parent%}
 			{% if p_menu_parent.grouper != none %}
 			<div class="navbar-nav dropdown">
-			<a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars" ></i> {{ p_menu_parent.grouper }}</a>
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars" ></i> {{ p_menu_parent.grouper }}</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				{% for item in p_menu_parent.list|dictsortreversed:"p_menu_poid" %}
 					<a class="dropdown-item" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %}  href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
@@ -62,7 +62,7 @@
 		{% endif %}
 		{% if page.c_menulogin == 'True' %}
 			<div class="navbar-nav dropdown">
-				<a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-id-badge" ></i> Mon profil</a>
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-id-badge" ></i> Mon profil</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					{% if not request.user.is_authenticated %}
 						<a class="dropdown-item" href="{% url 'core_login' %}" ><i class="fas fa-sign-in-alt"></i> Connexion</a>
