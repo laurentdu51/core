@@ -7,7 +7,7 @@
 <meta name="keywords" content="{%if page.p_mots_clefs%}{{page.p_mots_clefs}}{% endif %}">
 <meta name="description" content="{% if page.p_description %}{{page.p_description}}{% endif %}">
 {% block add_meta_description %}{% endblock %}
-<title>{% if page.p_meta_title %}{{page.p_meta_title}} | {% elif page.p_titre %}{{page.p_titre}} | {% endif %}{{page.c_sitename}}</title>
+<title>{{page.c_sitename}}{% if page.p_meta_title %} | {{page.p_meta_title}}{% elif page.p_titre %} | {{page.p_titre}}{% endif %}</title>
 <link rel="shortcut icon" href="/static/favicon.ico">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <link href="//fonts.googleapis.com/css2?family=Kufam&display=swap" rel="stylesheet">
