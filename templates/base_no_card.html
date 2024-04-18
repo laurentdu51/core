@@ -168,7 +168,7 @@
 </main>
 <footer class="footer mt-auto py-1 text-white" style="background-color: {{page.c_bgcolor}};">
 	<div class="container">
-		{{page.c_sitename}} - Jan. 2024
+		{{page.c_sitename}} - {{page.c_siteversion}}
 		{% if page.p_menu_pied %}
 		{% for item in page.p_menu_pied %}
 			<a class="link-light" href="{{item.p_adresse}}">{{item.p_titre}}</a>{% if not forloop.last %}, {% endif %}

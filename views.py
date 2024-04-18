@@ -49,6 +49,11 @@ def get_data_value(name):
 			data.d_type = "txt"
 			data.d_variable = "far fa-clone"
 			data.save()
+		elif name == "site-version":
+			data.d_titre = name
+			data.d_type = "txt"
+			data.d_variable = "Jan. 2024"
+			data.save()
 		elif name == "background-color":
 			data.d_titre = name
 			data.d_type = "txt"
@@ -106,6 +111,7 @@ def gen_page_base():
 	page.p_see_title_and_des_in_templates = True
 
 	page.c_sitename = get_data_value('site-name')
+	page.c_siteversion = get_data_value('site-version')
 	page.c_sitelogo = get_data_value('site-logo')
 	page.c_bgcolor = get_data_value('background-color')
 	page.c_bgimage = get_data_value('background')
