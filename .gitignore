@@ -49,7 +49,10 @@ __pycache__/apps.cpython-39.pyc
 __pycache__/models.cpython-39.pyc
 __pycache__/views.cpython-39.pyc
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 280cb3b4f2e2036cecc83affff6c522c979dfaf1
 migrations/__pycache__/__init__.cpython-39.pyc
 migrations/__pycache__/0001_initial.cpython-39.pyc
 migrations/__pycache__/0002_auto_20220422_0914.cpython-39.pyc
@@ -71,4 +74,7 @@ __pycache__/admin.cpython-39.pyc
 __pycache__/apps.cpython-39.pyc
 __pycache__/models.cpython-39.pyc
 __pycache__/views.cpython-39.pyc
+<<<<<<< HEAD
 >>>>>>> f006307a6dc26bb0bf0f207c1b2da5a603ceef6b
+=======
+>>>>>>> 280cb3b4f2e2036cecc83affff6c522c979dfaf1
