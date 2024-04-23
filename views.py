@@ -27,11 +27,25 @@ def gen_menu(position):
 		menu = Page.objects.none()
 	return menu
 
-def gen_speeddial():
+def get_groupe():
 	try:
-		speeddial = Speed_Dial.objects.order_by('-sd_poid')
+		goupes = Groupe.objects.all()
 	except:
-		speeddial = Speed_Dial.objects.none()
+		goupes = Groupe.objects.none()
+	return goupes
+
+def gen_speeddial(grp):
+	print(grp)
+	if grp != None:
+		try:
+			speeddial = Speed_Dial.objects.filter(sd_groupe__g_nom_slugify = grp).order_by('-sd_poid')
+		except:
+			speeddial = Speed_Dial.objects.none()
+	else:
+		try:
+			speeddial = Speed_Dial.objects.order_by('-sd_poid')
+		except:
+			speeddial = Speed_Dial.objects.none()
 	return speeddial
 
 def get_data_value(name):
@@ -133,6 +147,9 @@ def gen_page_sys(p_titre_slugify):
 		page.p_titre = "404 ! Erreur sur la page demmandé"
 		page.p_icone = "fas fa-bug"
 
+	if page.p_groupe == True:
+		page.groupe = get_groupe()
+
 	page.p_menu_haut = gen_menu('haut')
 	page.p_menu_pied = gen_menu('pied')
 	page.p_meta_title = page.p_titre
@@ -152,8 +169,14 @@ def gen_page_sys(p_titre_slugify):
 
 def index(request):
 	page = gen_page_sys('bienvenus')
-	page.speeddial = gen_speeddial()
+	page.p_get_groupe = request.GET.get('grp')
 
+	if page.p_speedial == True:
+		try:
+			page.speeddial = gen_speeddial(page.p_get_groupe)
+		except:
+			page.speeddial = gen_speeddial(None)
+	
 	template = loader.get_template('page.html')
 	context = {
 		'page' : page,
@@ -166,6 +189,7 @@ def page(request, p_url):
 	template = loader.get_template('page.html')
 	try:
 		page = Page.objects.get(p_adresse = p_url)
+		
 		page.p_menu_haut = gen_menu('haut')
 		page.p_menu_pied = gen_menu('pied')
 		page.p_meta_title = page.p_titre
@@ -178,6 +202,8 @@ def page(request, p_url):
 	except:
 		page = gen_page_base()
 		page.p_contenu = "<h1>Erreur la page demandé n'existe pas </h1>"
+
+	page.p_get_groupe = request.GET.get('grp')
 
 	context = {
 		'page' : page,

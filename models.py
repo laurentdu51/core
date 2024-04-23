@@ -30,6 +30,23 @@ page_color = (
 	(u'white', u'Blanc'),
 )
 
+class Groupe (models.Model) : #group pour organisation
+	g_nom = models.CharField("Nom du groupe", max_length = 128, unique = True)
+	g_nom_slugify = models.CharField("Nom Slugify", max_length = 128, blank = True, editable = False)
+	g_description = models.TextField("Description", blank = True)
+
+	class Meta :
+		verbose_name = 'Groupe'
+		verbose_name_plural = 'Groupes'
+
+	def save(self, *args, **kwargs) :
+		self.g_nom_slugify = slugify(self.g_nom)
+		super(Groupe, self).save(*args, **kwargs)
+	def __unicode__(self):
+		return self.g_nom
+	def __str__(self):
+		return '%s' % (self.g_nom)
+
 class Data (models.Model) : #stocage de donnée dynamique
 	d_titre = models.CharField("Nom", max_length = 128, unique = True)
 	d_titre_slugify = models.CharField("Nom Slugify", max_length = 128, blank = True, editable = False)
@@ -82,6 +99,8 @@ class Page (models.Model) : #Architecture pour les pages static est dynamique
 	p_description = models.TextField("Description", blank = True)
 	p_contenu = models.TextField("Contenu", blank = True)
 	p_right = models.TextField("Contenu à droite", blank = True)
+	p_groupe = models.BooleanField("Afficher les groupes", default = False)
+	p_speedial = models.BooleanField("Afficher le Speedial", default = False)
 	p_publier = models.BooleanField("Publié", default = False)
 	p_see_title_and_des_in_templates = models.BooleanField("Description et titre visible dans les templates", default = True)
 
@@ -104,7 +123,8 @@ class Page (models.Model) : #Architecture pour les pages static est dynamique
 		return '%s' % (self.p_titre)
 	
 class Speed_Dial (models.Model) : # model pour génération de page SpeedDial
-	sd_titre = models.CharField("Titre", max_length = 128, unique = True)
+	sd_titre = models.CharField("Titre", max_length = 128)
+	sd_groupe = models.ForeignKey(Groupe,verbose_name="Groupe", blank = True, null = True, on_delete=models.PROTECT)
 	sd_icone = models.CharField("Code de l'icone", max_length = 64, blank = True)
 	sd_color = models.CharField("Couleur du cadre",choices=page_color, max_length=10, default='primary')
 	sd_adresse = models.CharField("Adresse", max_length = 256)

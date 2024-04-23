@@ -21,7 +21,7 @@
 				<div class="card bg-{{item.sd_color}}" style="padding: 1px;">
 					<div class="card-body d-flex flex-row" style=" background : white; opacity: 0.85;">
 						<div class="p-2"><a class="text-decoration-none" href="{{item.sd_adresse}}" target="_blank"><i class="{% if item.sd_icone != '' %}{{item.sd_icone }}{% else %}fas fa-external-link-square-alt{% endif %}"></i></a></div>
-						<div class="p-2 w-80" onmouseover="this.style.cursor='pointer';" onclick="bt_open_url('{{item.sd_adresse|escapejs}}')">{{item.sd_titre}}</div>
+						<div class="p-2 w-80" onmouseover="this.style.cursor='pointer';" onclick="bt_open_url('{{item.sd_adresse|escapejs}}')">{% if item.sd_groupe %}[{{ item.sd_groupe }}] {% endif %}{{item.sd_titre}}</div>
 					</div>
 				</div>
 			</div>
@@ -56,6 +56,14 @@
 			</form>
 	{% endif %}
 	{{page.p_right|safe}}
+	{% if page.groupe %}
+		<h4> <i class="fas fa-tags"></i> Les Groupes </h4>
+		<p class="card-text">
+		{% for grp in page.groupe %}
+			<a href="{{request.path}}?grp={{grp.g_nom_slugify}}" class="btn btn-dark mb-2" tabindex="-1" role="button" aria-disabled="true">{{grp.g_nom}}</a>
+		{% endfor %}
+		<a href="{{request.path}}" class="btn btn-dark mb-2" tabindex="-1" role="button" aria-disabled="true">Aucun</a>
+	{% endif %}
 </div>
 {% endif %}
 {% endblock %}
