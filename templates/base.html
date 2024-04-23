@@ -139,25 +139,25 @@
 		</div>
 		<div class="col-lg-3 p-lg-1 p-md-0 mb-sm-1">
 			{% if page.c_card_rp == 'True'%}<div class="card" style="background-color: rgba(250,250,250,0.88);" >{% endif %}
-				{% if page.c_includ_rp != 'None'%}{% include page.c_includ_rp %}{% endif %}
-				{% block right_panel %}
-				{% endblock %}
-				{% if not request.user.is_authenticated and page.p_right and not "account/" in request.path %}
-					<div class="card-body">
-						<h5 class="card-title"> Une Pub </h5>
-						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<!-- Pub-1 -->
-						<ins class="adsbygoogle"
-							style="display:block"
-							data-ad-client="ca-pub-0171697375250839"
-							data-ad-slot="9918621322"
-							data-ad-format="auto"
-							data-full-width-responsive="true">
-						</ins>
-						<script>
-							(adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
-				{% endif %}
+			{% if page.c_includ_rp != 'None'%}{% include page.c_includ_rp %}{% endif %}
+			{% block right_panel %}
+			{% endblock %}
+			{% if not request.user.is_authenticated and page.p_right and not "account/" in request.path %}
+				<div class="card-body">
+					<h5 class="card-title"> Une Pub </h5>
+					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- Pub-1 -->
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-0171697375250839"
+						data-ad-slot="9918621322"
+						data-ad-format="auto"
+						data-full-width-responsive="true">
+					</ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+			{% endif %}
 			{% if page.c_card_rp != 'None'%}</div>{% endif %}
 		</div>
 	</div>
