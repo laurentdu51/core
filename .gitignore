@@ -84,3 +84,9 @@ migrations/__pycache__/0018_speed_dial_sd_groupe.cpython-312.pyc
 migrations/__pycache__/0019_alter_speed_dial_sd_groupe.cpython-312.pyc
 migrations/__pycache__/0020_alter_speed_dial_sd_titre.cpython-312.pyc
 migrations/__pycache__/0021_auto_20240423_1338.cpython-312.pyc
+migrations/__pycache__/0016_groupe.cpython-39.pyc
+migrations/__pycache__/0017_groupe_g_description.cpython-39.pyc
+migrations/__pycache__/0018_speed_dial_sd_groupe.cpython-39.pyc
+migrations/__pycache__/0019_alter_speed_dial_sd_groupe.cpython-39.pyc
+migrations/__pycache__/0020_alter_speed_dial_sd_titre.cpython-39.pyc
+migrations/__pycache__/0021_auto_20240423_1338.cpython-39.pyc
