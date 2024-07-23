@@ -50,13 +50,13 @@
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars" ></i> {{ p_menu_parent.grouper }}</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				{% for item in p_menu_parent.list|dictsortreversed:"p_menu_poid" %}
-					<a class="dropdown-item {% if item.p_proteger == True and user.is_authenticated %}&nbsp;{% else %}disabled{% endif %}" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %} href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
+					<a class="dropdown-item {% if item.p_proteger == True and user.is_authenticated %} {% elif item.p_proteger == False %} {% else %}disabled{% endif %}" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %} href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
 				{% endfor %}
 				</div>
 			</div>
 			{% else %}
 				{% for item in p_menu_parent.list %}
-					<li class="nav-item"><a class="nav-link {% if item.p_proteger == True and user.is_authenticated %}&nbsp;{% else %}disabled{% endif %}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
+					<li class="nav-item"><a class="nav-link {% if item.p_proteger == True and user.is_authenticated %} {% elif item.p_proteger == False %} {% else %}disabled{% endif %}" {%if item.p_type == "lien_ext" %}target="_blank"{% endif %} href="{{item.p_adresse}}">{% if item.p_icone %}<i class="{{item.p_icone}}" ></i> {% endif %}{{item.p_titre}}</a></li>
 				{% endfor %}
 			{% endif %}
 		{% endfor %}
