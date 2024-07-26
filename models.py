@@ -102,6 +102,7 @@ class Page (models.Model) : #Architecture pour les pages static est dynamique
 	p_groupe = models.BooleanField("Afficher les groupes", default = False)
 	p_speedial = models.BooleanField("Afficher le Speedial", default = False)
 	p_publier = models.BooleanField("Publié", default = False)
+	p_proteger = models.BooleanField("Disponible que si authentifier", default = False)
 	p_see_title_and_des_in_templates = models.BooleanField("Description et titre visible dans les templates", default = True)
 
 	class Meta :
