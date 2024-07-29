@@ -3,36 +3,35 @@
 {% load crispy_forms_tags %}
 
 {% block main %}
-{% if request.user.is_authenticated %}
+<div class="col-lg-10">
 	<div class="card text-white bg-secondary m-5">
-	<div class="card-header">Oups ! </div>
-	<div class="card-body">
-		<p class="card-text">
-			Pardon, mais vous étés déjà connecté. <a href="{% url 'core_index' %}">Retourné à accueil</a>
-		</p>
+		{% if request.user.is_authenticated %}
+		<div class="card-header">Oups ! </div>
+		<div class="card-body">
+			<p class="card-text">
+				Pardon, mais vous étés déjà connecté. <a href="{% url 'core_index' %}">Retourné à accueil</a>
+			</p>
 		</div>
+		{% else %}
+		<div class="card-header">Connection</div>
+		<div class="card-body">
+			<form method="post">{% csrf_token %}
+				{{ form|crispy }}
+				<input type="submit" class="btn btn-success" value="Se connecter">
+			</form>
+		</div>	
+		{% endif %}
 	</div>
-{% else %}
-		<div class="card text-white bg-secondary m-5">
-	<div class="card-header">Aide</div>
-	<div class="card-body">
-		<p class="card-text">
-			Merci de vous connecter en utilisant vos informations de connexion liée à votre ouverture de session.
-		</p>
-		</div>
-	</div>
-
-{% endif %}
+</div>
 {% endblock %}
 
 {% block right_panel %}
 	<div class="card text-white bg-dark m-0">
-		<div class="card-header">Connection</div>
+		<div class="card-header">Aide</div>
 		<div class="card-body">
-		<form method="post">{% csrf_token %}
-			{{ form|crispy }}
-			<input type="submit" class="btn btn-success" value="Se connecter">
-		</form>
+			<p class="card-text">
+				Merci de vous connecter en utilisant vos informations de connexion liée à votre ouverture de session.
+			</p>
 		</div>
 	</div>
 {% endblock %}
