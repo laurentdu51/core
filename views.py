@@ -161,8 +161,18 @@ def gen_page_sys(p_titre_slugify):
 	page.c_bgimagelogo = get_data_value('background-logo')
 	page.c_menulogin = get_data_value('login-menu')
 	page.c_includ_rp = get_data_value('includ-right-panel')
-	page.c_card_mp = get_data_value('card-main-panel')
-	page.c_card_rp = get_data_value('card-right-panel')
+	if page.c_card_mp == "non":
+		page.c_card_mp = False
+	elif page.p_c_card_mp == "oui":
+		page.c_card_mp = True
+	else :
+		page.c_card_mp = get_data_value('card-main-panel')
+	if page.c_card_rp == "non":
+		page.c_card_rp = False
+	elif page.c_card_rp == "oui":
+		page.c_card_rp = True
+	else :
+		page.c_card_rp = get_data_value('card-right-panel')
 	
 	return page
 
