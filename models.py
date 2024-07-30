@@ -110,8 +110,8 @@ class Page (models.Model) : #Architecture pour les pages static est dynamique
 	p_publier = models.BooleanField("Publié", default = False)
 	p_proteger = models.BooleanField("Disponible que si authentifier", default = False)
 	p_see_title_and_des_in_templates = models.BooleanField("Description et titre visible dans les templates", default = True)
-	p_c_card_mp = models.CharField("Afficage du cadre central",choices=page_bordure, max_length=3, default='def')
-	p_c_card_rp = models.CharField("Afficage du cadre de droite",choices=page_bordure, max_length=3, default='def')
+	c_card_mp = models.CharField("Afficage du cadre central",choices=page_bordure, max_length=3, default='def')
+	c_card_rp = models.CharField("Afficage du cadre de droite",choices=page_bordure, max_length=3, default='def')
 
 	class Meta :
 		verbose_name = 'Gestion des pages'
