@@ -30,6 +30,12 @@ page_color = (
 	(u'white', u'Blanc'),
 )
 
+page_bordure = (
+	(u'def', u'Default'),
+	(u'oui', u'Oui'),
+	(u'non', u'Non'),
+)
+
 class Groupe (models.Model) : #group pour organisation
 	g_nom = models.CharField("Nom du groupe", max_length = 128, unique = True)
 	g_nom_slugify = models.CharField("Nom Slugify", max_length = 128, blank = True, editable = False)
@@ -104,6 +110,8 @@ class Page (models.Model) : #Architecture pour les pages static est dynamique
 	p_publier = models.BooleanField("Publié", default = False)
 	p_proteger = models.BooleanField("Disponible que si authentifier", default = False)
 	p_see_title_and_des_in_templates = models.BooleanField("Description et titre visible dans les templates", default = True)
+	p_card_main_panel= models.CharField("Afficage du cadre central",choices=page_bordure, max_length=3, default='def')
+	p_card_right_panel = models.CharField("Afficage du cadre de droite",choices=page_bordure, max_length=3, default='def')
 
 	class Meta :
 		verbose_name = 'Gestion des pages'
