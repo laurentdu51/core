@@ -162,9 +162,9 @@ def gen_page_sys(p_titre_slugify):
 	page.c_menulogin = get_data_value('login-menu')
 	page.c_includ_rp = get_data_value('includ-right-panel')
 	if page.c_card_mp == "non":
-		page.c_card_mp = "False"
+		page.c_card_mp = False
 	elif page.c_card_mp == "oui":
-		page.c_card_mp = "True"
+		page.c_card_mp = True
 	else :
 		page.c_card_mp = get_data_value('card-main-panel')
 	if page.c_card_rp == "non":
