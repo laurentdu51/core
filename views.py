@@ -168,9 +168,9 @@ def gen_page_sys(p_titre_slugify):
 	else :
 		page.c_card_mp = get_data_value('card-main-panel')
 	if page.c_card_rp == "non":
-		page.c_card_rp = False
+		page.c_card_rp = "False"
 	elif page.c_card_rp == "oui":
-		page.c_card_rp = True
+		page.c_card_rp = "True"
 	else :
 		page.c_card_rp = get_data_value('card-right-panel')
 	
