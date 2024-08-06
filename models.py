@@ -119,7 +119,11 @@ class Page (models.Model) : #Architecture pour les pages static est dynamique
 		ordering = ['p_adresse']
 
 	def save(self, *args, **kwargs) :
-		self.p_titre_slugify = slugify(self.p_titre)
+		if self.p_type == "sys" and self.p_titre_slugify == "":
+			self.p_titre_slugify = slugify(self.p_titre)
+		elif self.p_type != "sys":
+			self.p_titre_slugify = slugify(self.p_titre)
+
 		if self.p_type == "lien":
 			self.p_description = "."
 			self.p_contenu = "."
