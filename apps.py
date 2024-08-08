@@ -1,12 +1,14 @@
+import sys
 from django.apps import AppConfig
-
-
-
 
 class CoreConfig(AppConfig):
 	name = 'core'
 
 	def ready(self):
+
+		if 'migrate' in sys.argv:
+			return
+
 		print("-- Démarage du Core --")
 		print(">> Vérification des variables d'environement")
 
