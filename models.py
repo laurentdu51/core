@@ -30,6 +30,12 @@ page_color = (
 	(u'white', u'Blanc'),
 )
 
+page_bordure = (
+	(u'def', u'Default'),
+	(u'oui', u'Oui'),
+	(u'non', u'Non'),
+)
+
 class Groupe (models.Model) : #group pour organisation
 	g_nom = models.CharField("Nom du groupe", max_length = 128, unique = True)
 	g_nom_slugify = models.CharField("Nom Slugify", max_length = 128, blank = True, editable = False)
@@ -102,7 +108,10 @@ class Page (models.Model) : #Architecture pour les pages static est dynamique
 	p_groupe = models.BooleanField("Afficher les groupes", default = False)
 	p_speedial = models.BooleanField("Afficher le Speedial", default = False)
 	p_publier = models.BooleanField("Publié", default = False)
+	p_proteger = models.BooleanField("Disponible que si authentifier", default = False)
 	p_see_title_and_des_in_templates = models.BooleanField("Description et titre visible dans les templates", default = True)
+	c_card_mp = models.CharField("Afficage du cadre central",choices=page_bordure, max_length=3, default='def')
+	c_card_rp = models.CharField("Afficage du cadre de droite",choices=page_bordure, max_length=3, default='def')
 
 	class Meta :
 		verbose_name = 'Gestion des pages'
@@ -110,7 +119,11 @@ class Page (models.Model) : #Architecture pour les pages static est dynamique
 		ordering = ['p_adresse']
 
 	def save(self, *args, **kwargs) :
-		self.p_titre_slugify = slugify(self.p_titre)
+		if self.p_type == "sys" and self.p_titre_slugify == "":
+			self.p_titre_slugify = slugify(self.p_titre)
+		elif self.p_type != "sys":
+			self.p_titre_slugify = slugify(self.p_titre)
+
 		if self.p_type == "lien":
 			self.p_description = "."
 			self.p_contenu = "."

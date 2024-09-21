@@ -53,60 +53,8 @@ def get_data_value(name):
 		data = Data.objects.get(d_titre_slugify = name)
 	except:
 		data = Data()
-		if name == "site-name":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "Duhaz Core"
-			data.save()
-		elif name == "site-logo":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "far fa-clone"
-			data.save()
-		elif name == "site-version":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "Jan. 2024"
-			data.save()
-		elif name == "background-color":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "#999"
-			data.save()
-		elif name == "background":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "background.jpeg"
-			data.save()
-		elif name == "background-logo":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "logo-txt-Mrduhaz.png"
-			data.save()
-		elif name == "login-menu":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "True"
-			data.save()
-		elif name == "includ-right-panel":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "None"
-			data.save()
-		elif name == "card-main-panel":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "True"
-			data.save()
-		elif name == "card-right-panel":
-			data.d_titre = name
-			data.d_type = "txt"
-			data.d_variable = "True"
-			data.save()
-		else :
-			data.d_variable = "Blop"
+		data.d_variable = "Blop"
 	return data.d_variable
-
 
 def update_data_value(name, value):
 	try:
@@ -161,8 +109,18 @@ def gen_page_sys(p_titre_slugify):
 	page.c_bgimagelogo = get_data_value('background-logo')
 	page.c_menulogin = get_data_value('login-menu')
 	page.c_includ_rp = get_data_value('includ-right-panel')
-	page.c_card_mp = get_data_value('card-main-panel')
-	page.c_card_rp = get_data_value('card-right-panel')
+	if page.c_card_mp == "non":
+		page.c_card_mp = False
+	elif page.c_card_mp == "oui":
+		page.c_card_mp = True
+	else :
+		page.c_card_mp = get_data_value('card-main-panel')
+	if page.c_card_rp == "non":
+		page.c_card_rp = "False"
+	elif page.c_card_rp == "oui":
+		page.c_card_rp = "True"
+	else :
+		page.c_card_rp = get_data_value('card-right-panel')
 	
 	return page
 
