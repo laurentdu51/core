@@ -30,7 +30,7 @@ def bt_sd_poid_moin(modeladmin, request, queryset):
 bt_sd_poid_moin.short_description = "Diminuer le poid de 5"
 
 class Page_Admin(admin.ModelAdmin):
-	form = Page_Admin_Form
+	form = Page_Admin_Form  # Réactivé
 	list_display = ('p_titre', 'p_titre_slugify', 'p_adresse', 'p_contenu', 'p_right', 'p_type', 'p_menu_poid', 'p_publier','p_see_title_and_des_in_templates')
 	list_filter = ('p_type', 'p_menu_parent', 'p_publier', 'p_see_title_and_des_in_templates')
 	actions = [bt_p_menu_poid_plus, bt_p_menu_poid_moin, bt_p_publier, bt_p_not_publier]

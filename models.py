@@ -3,7 +3,7 @@ from django import forms
 
 from django.template.defaultfilters import slugify
 
-from trumbowyg.widgets import TrumbowygWidget
+from tinymce.widgets import TinyMCE  # Réactivé
 
 menu_pos = (
 	(u'no', u'No'),
@@ -45,11 +45,9 @@ class Groupe (models.Model) : #group pour organisation
 		verbose_name = 'Groupe'
 		verbose_name_plural = 'Groupes'
 
-	def save(self, *args, **kwargs) :
+	def save(self, *args, **kwargs):
 		self.g_nom_slugify = slugify(self.g_nom)
-		super(Groupe, self).save(*args, **kwargs)
-	def __unicode__(self):
-		return self.g_nom
+		super().save(*args, **kwargs)  # Python 3 moderne
 	def __str__(self):
 		return '%s' % (self.g_nom)
 
@@ -64,12 +62,10 @@ class Data (models.Model) : #stocage de donnée dynamique
 		verbose_name_plural = 'Stocage de données'
 		ordering = ['d_titre']
 
-	def save(self, *args, **kwargs) :
+	def save(self, *args, **kwargs):
 		self.d_titre_slugify = slugify(self.d_titre)
-		super(Data, self).save(*args, **kwargs)
+		super().save(*args, **kwargs)  # Python 3 moderne
 
-	def __unicode__(self):
-		return self.d_titre
 	def __str__(self):
 		return '%s' % (self.d_titre)
 	
@@ -83,11 +79,9 @@ class Fichier (models.Model) : # Upload de fichier pour réutilisation dans les 
 		verbose_name_plural = 'Stocage de fichiers'
 		ordering = ['f_date']
 
-	def save(self, *args, **kwargs) :
+	def save(self, *args, **kwargs):
 		self.f_nom = slugify(self.f_fichier.name)
-		super(Fichier, self).save(*args, **kwargs)
-	def __unicode__(self):
-		return self.f_nom
+		super().save(*args, **kwargs)  # Python 3 moderne
 	def __str__(self):
 		return '%s' % (self.f_nom)
 
@@ -128,10 +122,8 @@ class Page (models.Model) : #Architecture pour les pages static est dynamique
 			self.p_description = "."
 			self.p_contenu = "."
 
-		super(Page, self).save(*args, **kwargs)
+		super().save(*args, **kwargs)  # Python 3 moderne
 
-	def __unicode__(self):
-		return self.p_titre
 	def __str__(self):
 		return '%s' % (self.p_titre)
 	
@@ -167,8 +159,6 @@ class Contact (models.Model): # model de contact et retour de bug
 	c_description = models.TextField("Votre demande")
 	c_statut = models.CharField("Statut de la demande", max_length=16, choices=c_statut_liste, default = 'non_lu')
 
-	def __unicode__(self):
-		return self.c_name
 	def __str__(self):
 		return '%s' % (self.c_name)
 
@@ -177,12 +167,12 @@ class ContactForm(forms.ModelForm):# formulaire de contact lié au model
 		model = Contact
 		fields = ['c_name', 'c_email', 'c_type', 'c_description']
 
-class Page_Admin_Form(forms.ModelForm):
+class Page_Admin_Form(forms.ModelForm):  # Réactivé
 	class Meta:
 		model = Page
 		exclude = ['p_titre_slugify']
 		widgets = {
-			'p_contenu': TrumbowygWidget(),
-			'p_right': TrumbowygWidget(),
-			}
+			'p_contenu': TinyMCE(),
+			'p_right': TinyMCE(),
+		}
 
