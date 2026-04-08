@@ -245,3 +245,17 @@ def p_registration(request):
 		}
 	return HttpResponse(template.render(context, request))
 
+
+
+def gone_view(request, path=None):
+    """
+    Vue HTTP 410 Gone pour les anciennes URLs /youtube/ et /flux/
+    Indique à Google que ces ressources n'existent plus définitivement
+    Résout les problèmes de Soft 404 dans Google Search Console
+    """
+    from django.http import HttpResponseGone
+    return HttpResponseGone(
+        '<h1>410 Gone</h1>'
+        '<p>Cette ressource n\'existe plus. Elle faisait partie d\'un ancien projet (feeds.duhaz.fr) qui n\'est plus maintenu.</p>'
+        '<p><a href="/blog/">Retour au blog</a></p>'
+    )

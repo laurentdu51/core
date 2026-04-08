@@ -4,6 +4,7 @@ from django import forms
 from django.template.defaultfilters import slugify
 
 from tinymce.widgets import TinyMCE  # Réactivé
+from core.storage.backends import StaticStorage
 
 menu_pos = (
 	(u'no', u'No'),
@@ -72,7 +73,7 @@ class Data (models.Model) : #stocage de donnée dynamique
 class Fichier (models.Model) : # Upload de fichier pour réutilisation dans les pages
 	f_nom = models.CharField("Nom du fichier", max_length = 128, blank = True, editable = False)
 	f_date = models.DateTimeField("Date", auto_now_add=True)
-	f_fichier = models.FileField("Fichier", upload_to='static/uploads/')
+	f_fichier = models.FileField("Fichier", upload_to='uploads/', storage=StaticStorage())
 
 	class Meta :
 		verbose_name = 'Stocage de fichiers'

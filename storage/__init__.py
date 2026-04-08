@@ -1,0 +1,1 @@
+# Storage personnalisé pour les fichiers uploadés
