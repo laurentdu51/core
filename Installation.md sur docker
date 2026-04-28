@@ -1,29 +1,59 @@
-# Commande à exécuté dans votre environnement docker.
-# Avec Django 3.2.23 & django-crispy-forms==1.12.0 & django-trumbowyg
+# Installation Docker
 
-apk add git nano
+Ce guide suppose un environnement avec Python 3.9+ et Django 4.2.30.
 
-django-admin startproject dev_core
-cd dev_core
+## Étape 1 : Créer le projet
 
+```bash
+django-admin startproject myproject
+cd myproject
+```
+
+## Étape 2 : Installer les dépendances
+
+```bash
+pip install django==4.2.30
+pip install django-tinymce
+```
+
+## Étape 3 : Configurer settings.py
+
+Ajouter dans `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    'tinymce',
+    'core',
+]
+```
+
+Ajouter la configuration TinyMCE:
+
+```python
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 400,
+    'width': '100%',
+    'language': 'fr',
+    'plugins': 'table,wordcount,searchreplace,code',
+    'theme': 'silver',
+    'toolbar': 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link',
+}
+```
+
+## Étape 4 : Configurer urls.py
+
+Voir le fichier `URL.md` pour la configuration complète.
+
+## Étape 5 : Lancer les migrations
+
+```bash
 python manage.py migrate
 python manage.py createsuperuser
+```
 
-nano dev_core/settings.py
--->	ALLOWED_HOSTS = [*]
+## Étape 6 : Démarrer le serveur
 
+```bash
 python manage.py runserver 0.0.0.0:8080
-
-git clone https://dev.duhaz.fr/MrDuhaz/core.git
-
-nano dev_core/settings.py
--->	INSTALLED_APPS = [
-+	'trumbowyg',
-+	'crispy_forms',
-+	'core',
-
-rm dev_core/urls.py
-nano dev_core/urls.py > voir fichier url.md
-
-python manage.py migrate
-python manage.py runserver 0.0.0.0:8080
+```

@@ -1,6 +1,9 @@
 from django.contrib import admin
 from core.models import *
 
+# Import forms after models
+from core.models import Page_Admin_Form
+
 def bt_p_publier(modeladmin, request, queryset):
 	queryset.update(p_publier=True)
 bt_p_publier.short_description = "Passer en Public"

@@ -6,7 +6,15 @@ class CoreConfig(AppConfig):
 
 	def ready(self):
 
-		if 'migrate' in sys.argv:
+		if 'migrate' in sys.argv or 'makemigrations' in sys.argv:
+			return
+
+		# Skip if database doesn't exist yet
+		from django.db import connection
+		try:
+			with connection.cursor() as cursor:
+				cursor.execute("SELECT 1 FROM core_data LIMIT 1")
+		except:
 			return
 
 		print("-- Démarage du Core --")

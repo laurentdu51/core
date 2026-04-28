@@ -6,22 +6,22 @@ A Django framework for building and managing websites with a built-in admin inte
 
 ## Installation
 
-### Prerequisites
+### Prérequis
 
 ```bash
-pip install django==4.2.8
-pip install django-crispy-forms
-pip install django-tinymce  # WYSIWYG editor
+pip install django==4.2.30
+pip install django-tinymce
 ```
 
-### Getting Started
+### Démarrage
 
 ```bash
 python manage.py migrate
+python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Django admin is accessible at `/admin/`.
+L'admin Django est accessible à `/admin/`.
 
 ---
 
