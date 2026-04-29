@@ -82,6 +82,7 @@ def gen_page_base():
 	page.c_includ_rp = get_data_value('includ-right-panel')
 	page.c_card_mp = get_data_value('card-main-panel')
 	page.c_card_rp = get_data_value('card-right-panel')
+	page.c_rss_mode = get_data_value('rss-mode')
 
 	return page
 

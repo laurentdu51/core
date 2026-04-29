@@ -3,6 +3,7 @@
 ```bash
 pip install django==4.2.30
 pip install django-tinymce
+pip install django-crispy-forms
 ```
 
 **Installation :**

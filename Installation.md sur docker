@@ -14,6 +14,7 @@ cd myproject
 ```bash
 pip install django==4.2.30
 pip install django-tinymce
+pip install django-crispy-forms
 ```
 
 ## Étape 3 : Configurer settings.py
@@ -23,6 +24,7 @@ Ajouter dans `INSTALLED_APPS`:
 ```python
 INSTALLED_APPS = [
     # ...
+    'crispy_forms',
     'tinymce',
     'core',
 ]

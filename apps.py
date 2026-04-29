@@ -121,6 +121,16 @@ class CoreConfig(AppConfig):
 			data.d_variable = "True"
 			data.save()
 
+		print(">>> check rss-mode")
+		try :
+			data = Data.objects.get(d_titre_slugify = "rss-mode")
+		except :
+			data = Data()
+			data.d_titre = "rss-mode"
+			data.d_type = "txt"
+			data.d_variable = "False"
+			data.save()
+
 		print(">> Vérification des pages par default")
 
 		from core.models import Page

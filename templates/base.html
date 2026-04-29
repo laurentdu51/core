@@ -20,7 +20,9 @@
 	<title>{{page.c_sitename}}{% if page.p_meta_title %} | {{page.p_meta_title}}{% elif page.p_titre %} | {{page.p_titre}}{% endif %}</title>
 	
 	<!-- Flux RSS -->
+	{% if page.c_rss_mode == "True" %}
 	<link rel="alternate" type="application/rss+xml" title="Blog Duhaz - RSS Feed" href="{% url 'blog_rss_feed' %}">
+	{% endif %}
 	
 	<link rel="shortcut icon" href="/static/favicon.ico">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
