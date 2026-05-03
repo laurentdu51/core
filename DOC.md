@@ -8,10 +8,14 @@ A Django framework for building and managing websites with a built-in admin inte
 
 ### Prérequis
 
+- Python 3.12+
+- Un environnement virtuel activé (recommandé)
+
 ```bash
-pip install django==4.2.30
-pip install django-tinymce
-pip install django-crispy-forms
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r ../requirements.txt
 ```
 
 ### Démarrage
@@ -252,7 +256,7 @@ base.html          — Parent template (navbar, footer, Bootstrap 4 layout)
 
 ## Dependencies
 
-- **Django 4.2.8** — Framework
+- **Django 6.0.4** — Framework
 - **django-crispy-forms** — Styled forms
 - **django-tinymce** — WYSIWYG editor
 - **Bootstrap 4.6** — CSS (CDN)
